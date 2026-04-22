@@ -1,0 +1,23 @@
+def minimax(depth, node_index, is_maximizing_player, scores, target_depth):
+    if depth == target_depth:
+        return scores[node_index]
+
+    if is_maximizing_player:
+        return max(
+            minimax(depth + 1, node_index * 2, False, scores, target_depth),
+            minimax(depth + 1, node_index * 2 + 1, False, scores, target_depth)
+        )
+    else:
+        return min(
+            minimax(depth + 1, node_index * 2, True, scores, target_depth),
+            minimax(depth + 1, node_index * 2 + 1, True, scores, target_depth)
+        )
+
+
+tree_depth = int(input("Depth: "))
+scores = list(map(int, input("Scores: ").split()))
+
+result = minimax(0, 0, True, scores, tree_depth)
+print("Optimal value using Minimax:", result)
+
+//shreyasvbhat
