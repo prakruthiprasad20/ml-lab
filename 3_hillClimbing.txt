@@ -1,1 +1,65 @@
 study from record
+
+
+check...
+# Graph representation (Adjacency List)
+graph = {
+    'A': [('B', 4), ('C', 3)],
+    'B': [('D', 5), ('E', 12)],
+    'C': [('F', 7)],
+    'D': [],
+    'E': [('G', 2)],
+    'F': [('G', 1)],
+    'G': []
+}
+
+# Heuristic values (goal = lower value)
+heuristic = {
+    'A': 10,
+    'B': 8,
+    'C': 5,
+    'D': 7,
+    'E': 3,
+    'F': 6,
+    'G': 0
+}
+
+def hill_climbing(start, goal):
+    current = start
+    path = [current]
+
+    while current != goal:
+        neighbors = graph[current]
+
+        if not neighbors:
+            break
+
+        # choose best neighbor (lowest heuristic)
+        next_node = None
+        best_value = heuristic[current]
+
+        for neighbor, cost in neighbors:
+            if heuristic[neighbor] < best_value:
+                best_value = heuristic[neighbor]
+                next_node = neighbor
+
+        # if no better neighbor found → stop (local optimum)
+        if next_node is None:
+            break
+
+        current = next_node
+        path.append(current)
+
+    if current == goal:
+        return path
+    else:
+        return "Stuck at local optimum:", path
+
+
+# Run
+start_node = 'A'
+goal_node = 'G'
+
+result = hill_climbing(start_node, goal_node)
+
+print("Result:", result)
