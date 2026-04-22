@@ -1,0 +1,57 @@
+# Simple CRUD operations on a list
+
+data = []
+
+while True:
+    print("\n--- MENU ---")
+    print("1. Insert")
+    print("2. Update")
+    print("3. Delete")
+    print("4. Display")
+    print("5. Sort")
+    print("6. Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    # Insert
+    if choice == 1:
+        item = input("Enter value to insert: ")
+        data.append(item)
+        print("Item inserted.")
+
+    # Update
+    elif choice == 2:
+        old = input("Enter value to update: ")
+        if old in data:
+            new = input("Enter new value: ")
+            index = data.index(old)
+            data[index] = new
+            print("Item updated.")
+        else:
+            print("Item not found.")
+
+    # Delete
+    elif choice == 3:
+        item = input("Enter value to delete: ")
+        if item in data:
+            data.remove(item)
+            print("Item deleted.")
+        else:
+            print("Item not found.")
+
+    # Display
+    elif choice == 4:
+        print("List items:", data)
+
+    # Sort
+    elif choice == 5:
+        data.sort()
+        print("List sorted.")
+
+    # Exit
+    elif choice == 6:
+        print("Exiting program...")
+        break
+
+    else:
+        print("Invalid choice. Try again.")
